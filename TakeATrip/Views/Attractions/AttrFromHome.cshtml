@@ -1,0 +1,32 @@
+﻿@model TakeATrip.Models.AttractionsViewModel
+
+@{
+    ViewBag.Title = "AttrFromHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/Scripts/jquery-ui.js")
+@Scripts.Render("~/Scripts/attrFromHome.js")
+@Styles.Render("~/Content/jquery-ui.css")
+@Styles.Render("~/Content/attrFromHome.css")
+@Styles.Render("~/Content/font-awesome.css")
+
+<h1>Find Your Attraction</h1>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <ul>
+            @foreach (var item in Model.AttrList)
+            {
+                <li>
+                    <div> @item.Name</div>
+                    <div>
+                        <span class="stars">@item.Ranks.First().Rank</span>
+                    </div>
+                    <div> @item.Category.First().Name</div>
+                </li>
+            }
+        </ul>
+    }
+</div>

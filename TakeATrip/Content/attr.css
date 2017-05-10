@@ -1,0 +1,18 @@
+﻿#Name{
+    width:80%;
+    max-width:none;
+}
+#AttrSerchHeader{
+    text-align:center;
+    padding-top:40px;
+    
+}
+
+#attrSearchDiv{
+    width:500px;
+    margin:auto;
+}
+
+#searchIcon{
+    margin-left:5px;
+}

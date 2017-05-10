@@ -1,0 +1,70 @@
+﻿@using Jmelosegui.Mvc.GoogleMap
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<!-- https://github.com/matansebton/TakeATrip.git -->
+@Styles.Render("~/Content/home.css")
+@Styles.Render("~/Content/bootstrap-datepicker3.css")
+@Scripts.Render("~/Scripts/bootstrap-datepicker.js")
+@Scripts.Render("~/Scripts/main.js")
+<!-- Home -->
+<!-- Find a Tour -->
+<section class="tour section-wrapper container">
+    <div class="flexslider">
+        <ul class="slides">
+            <li class="slider-item">
+
+                <h2 class="section-title">
+                    Explore your Tour
+                </h2>
+                <div id="homeMainSearch">
+                   <div class="row">
+                       <div class="col-lg-6 col-lg-offset-3 ">
+                           <p class="section-subtitle">
+                               Where would you like to go?
+                           </p>
+                       </div>
+                    </div> 
+                     
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <form role="form" class="form-dropdown">
+                                <div class="form-group">
+                                    <label for="sel1">Select region (select one):</label>
+                                    <select class="form-control border-radius" id="sel1">
+                                        <option>America</option>
+                                        <option>Bangladesh</option>
+                                        <option>Canada</option>
+                                        <option>India</option>
+                                        <option>Spain</option>
+                                        <option>France</option>
+                                        <option>Israel</option>
+                                        <option>italy</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-4">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" placeholder="Arrival">
+                                    <div class="input-group-addon">to</div>
+                                    <input type="text" class="form-control" placeholder="Departure">
+                                </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="@Url.Action("AttrFromHome", "Attractions")">
+                                <div class="btn btn-default border-radius custom-button">
+                                    Search
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+ 
+</section>
+

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take A Trip</title>
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/main.css")
+    @Styles.Render("~/Content/ionicons.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html" title="HOME"><i class="ion-paper-airplane"></i> Take <span>A</span> Trip </a>
+            </div> <!-- /.navbar-header -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" id="MainMenuNavbar">
+                    <li class="active"><a href="@Url.Action("Index","Home")"><b>Home</b></a></li>
+                    <li id="NavbarAttr"><a href="@Url.Action("Index","Attractions")"><b>Attractions</b></a></li>
+                    <li><a href="@Url.Action("Index","Tracks")"><b>tracks</b></a></li>
+                    <li><a href="about.html"><b>about</b></a></li>
+                    <li><a href="contact.html"><b>contact</b></a></li>
+                </ul> <!-- /.nav -->
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

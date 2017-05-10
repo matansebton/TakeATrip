@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1e5c5cd0e604bc39f14002c640afa1f" Name="Diagram1">
+        <EntityTypeShape EntityType="TakeATripModel.Ranks" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakeATripModel.Websites" Width="1.5" PointX="5.375" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="TakeATripModel.FK_Ranks_Websites" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TakeATripModel.Attractions" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="TakeATripModel.FK_Ranks_Attractions" />
+        <EntityTypeShape EntityType="TakeATripModel.Category" Width="1.5" PointX="0.625" PointY="3.5" />
+        <AssociationConnector Association="TakeATripModel.AttrCat" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

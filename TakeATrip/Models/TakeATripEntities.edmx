@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TakeATripModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attractions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Location" Type="geography" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttrCat">
+          <Key>
+            <PropertyRef Name="CatId" />
+            <PropertyRef Name="AttrId" />
+          </Key>
+          <Property Name="CatId" Type="int" Nullable="false" />
+          <Property Name="AttrId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ranks">
+          <Key>
+            <PropertyRef Name="WebsiteId" />
+            <PropertyRef Name="AttrId" />
+          </Key>
+          <Property Name="WebsiteId" Type="int" Nullable="false" />
+          <Property Name="AttrId" Type="int" Nullable="false" />
+          <Property Name="Rank" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Websites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="URL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar(max)" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="Scale" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AttrCat_Attractions">
+          <End Role="Attractions" Type="Self.Attractions" Multiplicity="1" />
+          <End Role="AttrCat" Type="Self.AttrCat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attractions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttrCat">
+              <PropertyRef Name="AttrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttrCat_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="AttrCat" Type="Self.AttrCat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttrCat">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ranks_Attractions">
+          <End Role="Attractions" Type="Self.Attractions" Multiplicity="1" />
+          <End Role="Ranks" Type="Self.Ranks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attractions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ranks">
+              <PropertyRef Name="AttrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ranks_Websites">
+          <End Role="Websites" Type="Self.Websites" Multiplicity="1" />
+          <End Role="Ranks" Type="Self.Ranks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Websites">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ranks">
+              <PropertyRef Name="WebsiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TakeATripModelStoreContainer">
+          <EntitySet Name="Attractions" EntityType="Self.Attractions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttrCat" EntityType="Self.AttrCat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ranks" EntityType="Self.Ranks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Websites" EntityType="Self.Websites" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AttrCat_Attractions" Association="Self.FK_AttrCat_Attractions">
+            <End Role="Attractions" EntitySet="Attractions" />
+            <End Role="AttrCat" EntitySet="AttrCat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttrCat_Category" Association="Self.FK_AttrCat_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="AttrCat" EntitySet="AttrCat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ranks_Attractions" Association="Self.FK_Ranks_Attractions">
+            <End Role="Attractions" EntitySet="Attractions" />
+            <End Role="Ranks" EntitySet="Ranks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ranks_Websites" Association="Self.FK_Ranks_Websites">
+            <End Role="Websites" EntitySet="Websites" />
+            <End Role="Ranks" EntitySet="Ranks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TakeATripModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ranks">
+          <Key>
+            <PropertyRef Name="WebsiteId" />
+            <PropertyRef Name="AttrId" />
+          </Key>
+          <Property Name="WebsiteId" Type="Int32" Nullable="false" />
+          <Property Name="AttrId" Type="Int32" Nullable="false" />
+          <Property Name="Rank" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Websites" Relationship="Self.FK_Ranks_Websites" FromRole="Ranks" ToRole="Websites" />
+          <NavigationProperty Name="Attractions" Relationship="TakeATripModel.FK_Ranks_Attractions" FromRole="Ranks" ToRole="Attractions" />
+        </EntityType>
+        <EntityType Name="Websites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="Scale" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ranks" Relationship="Self.FK_Ranks_Websites" FromRole="Websites" ToRole="Ranks" />
+        </EntityType>
+        <Association Name="FK_Ranks_Websites">
+          <End Role="Websites" Type="Self.Websites" Multiplicity="1" />
+          <End Role="Ranks" Type="Self.Ranks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Websites">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ranks">
+              <PropertyRef Name="WebsiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TakeATripEntitiesConnectionString" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ranks" EntityType="Self.Ranks" />
+          <EntitySet Name="Websites" EntityType="Self.Websites" />
+          <AssociationSet Name="FK_Ranks_Websites" Association="Self.FK_Ranks_Websites">
+            <End Role="Websites" EntitySet="Websites" />
+            <End Role="Ranks" EntitySet="Ranks" />
+          </AssociationSet>
+          <EntitySet Name="Attractions" EntityType="TakeATripModel.Attractions" />
+          <AssociationSet Name="FK_Ranks_Attractions" Association="TakeATripModel.FK_Ranks_Attractions">
+            <End Role="Attractions" EntitySet="Attractions" />
+            <End Role="Ranks" EntitySet="Ranks" />
+          </AssociationSet>
+          <EntitySet Name="Category" EntityType="TakeATripModel.Category" />
+          <AssociationSet Name="AttrCat" Association="TakeATripModel.AttrCat">
+            <End Role="Attractions" EntitySet="Attractions" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Attractions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="Geography" Nullable="false" />
+          <NavigationProperty Name="Ranks" Relationship="TakeATripModel.FK_Ranks_Attractions" FromRole="Attractions" ToRole="Ranks" />
+          <NavigationProperty Name="Category" Relationship="TakeATripModel.AttrCat" FromRole="Attractions" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_Ranks_Attractions">
+          <End Type="TakeATripModel.Attractions" Role="Attractions" Multiplicity="1" />
+          <End Type="TakeATripModel.Ranks" Role="Ranks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attractions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ranks">
+              <PropertyRef Name="AttrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Attractions" Relationship="TakeATripModel.AttrCat" FromRole="Category" ToRole="Attractions" />
+        </EntityType>
+        <Association Name="AttrCat">
+          <End Type="TakeATripModel.Attractions" Role="Attractions" Multiplicity="*" />
+          <End Type="TakeATripModel.Category" Role="Category" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TakeATripModelStoreContainer" CdmEntityContainer="TakeATripEntitiesConnectionString">
+          <EntitySetMapping Name="Ranks">
+            <EntityTypeMapping TypeName="TakeATripModel.Ranks">
+              <MappingFragment StoreEntitySet="Ranks">
+                <ScalarProperty Name="WebsiteId" ColumnName="WebsiteId" />
+                <ScalarProperty Name="AttrId" ColumnName="AttrId" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Websites">
+            <EntityTypeMapping TypeName="TakeATripModel.Websites">
+              <MappingFragment StoreEntitySet="Websites">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Scale" ColumnName="Scale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attractions">
+            <EntityTypeMapping TypeName="TakeATripModel.Attractions">
+              <MappingFragment StoreEntitySet="Attractions">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="TakeATripModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AttrCat" TypeName="TakeATripModel.AttrCat" StoreEntitySet="AttrCat">
+            <EndProperty Name="Category">
+              <ScalarProperty Name="Id" ColumnName="CatId" />
+            </EndProperty>
+            <EndProperty Name="Attractions">
+              <ScalarProperty Name="Id" ColumnName="AttrId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

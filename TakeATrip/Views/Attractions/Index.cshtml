@@ -1,0 +1,33 @@
+﻿@model TakeATrip.Models.Attractions
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/Scripts/jquery-ui.js")
+@Scripts.Render("~/Scripts/attr.js")
+@Styles.Render("~/Content/jquery-ui.css")
+@Styles.Render("~/Content/attr.css")
+@Styles.Render("~/Content/font-awesome.css")
+
+<h1 id="AttrSerchHeader">Search Your Attraction</h1>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr/>
+
+            <div class="form-group">
+                <div id="attrSearchDiv" class="col-lg-offset-3">
+                    @Html.HiddenFor(model => model.Id)
+                    <div>
+                        @Html.EditorFor(model => model.Name, new { HtmlAttribute = new { @class = "form-control" } })
+                        <button type="submit" class="btn btn-primary">Search<span><i id="searchIcon" class="fa fa-search"></i></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
