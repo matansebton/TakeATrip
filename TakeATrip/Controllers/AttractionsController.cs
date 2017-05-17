@@ -53,5 +53,11 @@ namespace TakeATrip.Controllers
             model.AttrList = db.Attractions.ToList();
             return View(model);
         }
+
+        public ActionResult GetRanksList(int id)
+        {
+            var result = db.Attractions.Find(id).Ranks.Select(d => new { Name = d.Websites.Name, Rank = d.Rank, Logo = d.Websites.Logo , Weight = d.Websites.Weight, Scale = d.Websites.Scale}).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
