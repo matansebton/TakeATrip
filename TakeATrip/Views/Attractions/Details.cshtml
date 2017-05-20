@@ -6,7 +6,11 @@
 }
 @Styles.Render("~/Content/font-awesome.css")
 <link href="~/Content/attrDetails.css" rel="stylesheet" />
+
+<script>var pixabayWidget = { 'key': '5393889-2ab22bb848a62eebf28c615cc' }</script>
+<script src="~/Scripts/pixabay-widget.js"></script>
 <script src="~/Scripts/attrDetails.js"></script>
+
 <div>
     <div class="page-header">
         <h1>@Html.DisplayFor(model => model.Name)<small id="addressSubtext"></small></h1>
@@ -28,6 +32,8 @@
         @Html.HiddenFor(model=> model.Id)
     <div id="map"></div>
     <div id="attractionRanks"></div>
+    <div class="pixabay_widget" data-search="@Html.DisplayFor(model => model.Name)" data-max-rows="3"></div>
+
     <script>
         function initMap() {
             var lat = parseFloat($("#Location_StartPoint_Latitude").val());
