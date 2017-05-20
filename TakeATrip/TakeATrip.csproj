@@ -334,7 +334,6 @@
     <Content Include="Views\Tracks\Index.cshtml" />
     <Content Include="Views\Basic\index.cshtml" />
     <Content Include="Views\Basic\MapAddress.cshtml" />
-    <Content Include="Views\Attractions\Details.cshtml" />
     <Content Include="Views\Attractions\Index.cshtml" />
     <Content Include="Views\Attractions\AttrFromHome.cshtml" />
   </ItemGroup>
