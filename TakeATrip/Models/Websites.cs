@@ -12,7 +12,7 @@ namespace TakeATrip.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
-    
+
     public partial class Websites
     {
         public Websites()
@@ -20,7 +20,6 @@ namespace TakeATrip.Models
             this.Ranks = new HashSet<Ranks>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string URL { get; set; }

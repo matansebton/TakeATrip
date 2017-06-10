@@ -190,6 +190,7 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>TakeATripEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomeDataModel.cs" />
     <Compile Include="Models\Ranks.cs">
       <DependentUpon>TakeATripEntities.tt</DependentUpon>
     </Compile>
@@ -290,6 +291,7 @@
       <DependentUpon>TakeATripEntities.edmx</DependentUpon>
       <LastGenOutput>TakeATripEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\countriesToCities.json" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Scripts\attrFromHome.js" />
@@ -336,6 +338,7 @@
     <Content Include="Views\Basic\MapAddress.cshtml" />
     <Content Include="Views\Attractions\Index.cshtml" />
     <Content Include="Views\Attractions\AttrFromHome.cshtml" />
+    <Content Include="Views\Attractions\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AttrDetails\" />

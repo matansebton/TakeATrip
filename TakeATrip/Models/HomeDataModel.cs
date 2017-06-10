@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace TakeATrip.Models
 {
-    public class AttractionsViewModel
+    public class HomeDataModel
     {
-        public List<Attractions> AttrList { get; set; }
         public int SelectedCatId { get; set; }
         public IEnumerable<SelectListItem> CatList { get; set; }
-        public string City;
+        public string Country { get; set; }
+        public string City { get; set; }
     }
 }

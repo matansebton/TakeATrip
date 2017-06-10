@@ -27,6 +27,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FatherCat" Type="int" />
         </EntityType>
         <EntityType Name="Ranks">
           <Key>
@@ -48,6 +49,18 @@
           <Property Name="Weight" Type="int" Nullable="false" />
           <Property Name="Scale" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FatherCat">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="FatherCat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AttrCat_Attractions">
           <End Role="Attractions" Type="Self.Attractions" Multiplicity="1" />
           <End Role="AttrCat" Type="Self.AttrCat" Multiplicity="*" />
@@ -102,6 +115,10 @@
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ranks" EntityType="Self.Ranks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Websites" EntityType="Self.Websites" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FatherCat" Association="Self.FatherCat">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
           <AssociationSet Name="FK_AttrCat_Attractions" Association="Self.FK_AttrCat_Attractions">
             <End Role="Attractions" EntitySet="Attractions" />
             <End Role="AttrCat" EntitySet="AttrCat" />
@@ -175,6 +192,10 @@
             <End Role="Attractions" EntitySet="Attractions" />
             <End Role="Category" EntitySet="Category" />
           </AssociationSet>
+          <AssociationSet Name="FatherCat" Association="TakeATripModel.FatherCat">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Attractions">
           <Key>
@@ -205,10 +226,25 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Attractions" Relationship="TakeATripModel.AttrCat" FromRole="Category" ToRole="Attractions" />
+          <Property Name="FatherCat" Type="Int32" />
+          <NavigationProperty Name="Category1" Relationship="TakeATripModel.FatherCat" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="Category2" Relationship="TakeATripModel.FatherCat" FromRole="Category1" ToRole="Category" />
         </EntityType>
         <Association Name="AttrCat">
           <End Type="TakeATripModel.Attractions" Role="Attractions" Multiplicity="*" />
           <End Type="TakeATripModel.Category" Role="Category" Multiplicity="*" />
+        </Association>
+        <Association Name="FatherCat">
+          <End Type="TakeATripModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="TakeATripModel.Category" Role="Category1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="FatherCat" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -249,6 +285,7 @@
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="TakeATripModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="FatherCat" ColumnName="FatherCat" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

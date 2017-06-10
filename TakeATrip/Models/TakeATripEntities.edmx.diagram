@@ -12,6 +12,7 @@
         <AssociationConnector Association="TakeATripModel.FK_Ranks_Attractions" />
         <EntityTypeShape EntityType="TakeATripModel.Category" Width="1.5" PointX="0.625" PointY="3.5" />
         <AssociationConnector Association="TakeATripModel.AttrCat" />
+        <AssociationConnector Association="TakeATripModel.FatherCat" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

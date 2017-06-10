@@ -1,4 +1,11 @@
 ﻿$(document).ready(function () {
+    //$('#attrTable').DataTable();
+
+
+
+
+
+
     $("#MainMenuNavbar .active").removeClass('active');
     $('#NavbarAttr').addClass('active');
 

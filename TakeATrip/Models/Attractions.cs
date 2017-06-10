@@ -12,7 +12,7 @@ namespace TakeATrip.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
-    
+
     public partial class Attractions
     {
         public Attractions()
@@ -20,8 +20,8 @@ namespace TakeATrip.Models
             this.Ranks = new HashSet<Ranks>();
             this.Category = new HashSet<Category>();
         }
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
         public System.Data.Entity.Spatial.DbGeography Location { get; set; }

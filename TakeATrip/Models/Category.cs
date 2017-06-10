@@ -12,18 +12,22 @@ namespace TakeATrip.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
-    
+
     public partial class Category
     {
         public Category()
         {
             this.Attractions = new HashSet<Attractions>();
+            this.Category1 = new HashSet<Category>();
         }
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
+        public Nullable<int> FatherCat { get; set; }
     
         public virtual ICollection<Attractions> Attractions { get; set; }
+        public virtual ICollection<Category> Category1 { get; set; }
+        public virtual Category Category2 { get; set; }
     }
 }

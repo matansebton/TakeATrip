@@ -46,6 +46,8 @@ namespace TakeATrip.Controllers
             var result = db.Attractions.ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+
         [HttpGet]
         public ActionResult AttrFromHome()
         {

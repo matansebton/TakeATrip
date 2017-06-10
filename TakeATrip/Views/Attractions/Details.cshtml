@@ -23,9 +23,12 @@
                 <small><span class="stars"></span></small>
             }                      
         </h3>
-        <h4>
-            @Html.DisplayFor(model=> model.Category.First().Name)
-        </h4>
+            @foreach (TakeATrip.Models.Category Cat in Model.Category)
+            {
+                <h4>
+                    @Cat.Name
+                </h4>
+            }
     </div>
         @Html.HiddenFor(model => model.Location.StartPoint.Latitude)
         @Html.HiddenFor(model => model.Location.StartPoint.Longitude)

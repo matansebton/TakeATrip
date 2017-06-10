@@ -14,6 +14,7 @@ namespace TakeATrip.Models
     
     public partial class Ranks
     {
+
         public int WebsiteId { get; set; }
         public int AttrId { get; set; }
         public double Rank { get; set; }
