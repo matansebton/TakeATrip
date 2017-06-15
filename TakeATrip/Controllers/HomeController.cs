@@ -35,7 +35,6 @@ namespace TakeATrip.Controllers
                         where a.Category.Where(cc => cc.FatherCat == model.SelectedCatId).Any()
                         select a;
 
-                        
             PassModel.AttrList = new List<Attractions>();
 
             var cats = db.Category.Where(c => c.FatherCat == model.SelectedCatId).Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
@@ -56,7 +55,7 @@ namespace TakeATrip.Controllers
                 if (CountryOK)
                 {
                     bool CityOk = Addresses.Any(a => a.Element("long_name").Value == model.City);
-                    if (CityOk) PassModel.AttrList.Add(atr);
+                    if (CityOk && !PassModel.AttrList.Exists(a => a.Id == atr.Id)) PassModel.AttrList.Add(atr);
                 }
             }
             return View("../Attractions/AttrFromHome",PassModel);

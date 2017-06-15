@@ -4,6 +4,7 @@
     ViewBag.Title = "AttrFromHome";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
 
 @Scripts.Render("~/Scripts/jquery-ui.js")
 @Scripts.Render("~/Scripts/attrFromHome.js")
@@ -15,7 +16,6 @@
 <script>var pixabayWidget = { 'key': '5393889-2ab22bb848a62eebf28c615cc' }</script>
 <script src="~/Scripts/pixabay-widget.js"></script>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
 <h1>Find Your Attraction</h1>
 
 <div>
@@ -33,15 +33,29 @@
                         <th hidden></th>
                         <th style="width:80%">Name</th>
                         <th style="width:20%">Rank</th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.AttrList)
+                    @foreach (TakeATrip.Models.Attractions item in Model.AttrList)
                     {
                         <tr>
                             <td> @item.Id</td>
                             <td> @item.Name</td>
-                            <td><span class="stars">@item.Ranks.First().Rank</span></td>
+                           @* <td><span class="stars">@item.Ranks.First().Rank</span></td>*@
+                            <td>
+                                @foreach (var rank in item.Ranks)
+                                {
+                                    @Html.Raw(rank.Rank + ",")
+                                }
+
+                            </td>
+                            <td>
+                                @foreach (var cat in item.Category)
+                                {
+                                    @Html.Raw(cat.Id + ",")
+                                }
+                            </td>
                         </tr>
                     }
                 </tbody>

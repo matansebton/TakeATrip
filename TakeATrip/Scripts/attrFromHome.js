@@ -1,8 +1,51 @@
 ﻿$(document).ready(function () {
-    //$('#attrTable').DataTable();
+    
+    table = $('#attrTable').DataTable({
+        'columns': [
+            {
+                visible: false,
+                orderable: false,
+            },
+            {
+
+            },
+            {
+                render: function (data, type, row) {
+                    var returnRank;
+                    $.ajax({
+                        url: '/Attractions/GetRanksList',
+                        cache: false,
+                        async: false,
+                        data: 
+                        {
+                            id: row[0]
+                        },
+                        success: function (data) {
+                            var ranks = [];
+                            var sumOfWeight = 0;
+                            var result;
+                            $.each(data, function (index, value) {
+                                var item = { Rank: value.Rank, Scale: value.Scale, Weight: value.Weight };
+                                ranks.push(item);
+                                sumOfWeight += value.Weight;
+                            });
+                            returnRank = calcRank(ranks, sumOfWeight);
+                        }
+                    });
+                    return returnRank;
+                }
+            },
+            {
+                visible: false,
+                orderable: false,
+            }
+        ]
+    });
 
 
-
+    $("#SelectedCatId").change(function () {
+        table.draw();
+    });
 
 
 
@@ -26,3 +69,25 @@ $.fn.stars = function () {
         $(this).html($span);
     });
 }
+
+$.fn.dataTable.ext.search.push(
+    function (settings, data, dataIndex) {
+        var selectedCat = $("#SelectedCatId").val();
+        if (selectedCat != "")
+        {
+            var catArr = data[3].split(",");
+            catArr.pop();
+            return ($.inArray(selectedCat, catArr) > -1);
+        }
+        return true;
+    }
+);
+
+function calcRank(RanksArr, sumOfWeight) {
+    var totalRank = 0;
+    $.each(RanksArr, function (index, value) {
+        totalRank += ((5 / value.Scale) * value.Rank) * (value.Weight / sumOfWeight);
+    });
+    return totalRank;
+}
+
