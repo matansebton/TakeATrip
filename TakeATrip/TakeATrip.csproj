@@ -186,6 +186,7 @@
     <Compile Include="Models\Attractions.cs">
       <DependentUpon>TakeATripEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttractionsSearchModel.cs" />
     <Compile Include="Models\AttractionsViewModel.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>TakeATripEntities.tt</DependentUpon>
@@ -209,6 +210,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TakeATripEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\TracksViewModel.cs" />
     <Compile Include="Models\Websites.cs">
       <DependentUpon>TakeATripEntities.tt</DependentUpon>
     </Compile>
@@ -313,6 +315,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\tracks.js" />
     <Content Include="Scripts\markerclusterer.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\main.js" />

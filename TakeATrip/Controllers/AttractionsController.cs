@@ -17,15 +17,24 @@ namespace TakeATrip.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            AttractionsSearchModel model = new AttractionsSearchModel();
+            model.AttrList = new List<Attractions>();
+            var rand = new Random();
+            for (int i=0; i<3; i++)
+            {
+                model.AttrList.Add(db.Attractions.OrderBy(a => a.Id).Skip(rand.Next(db.Attractions.Count())).First());
+            }
+            return View(model);
         }
         [HttpPost]
-        public ActionResult Index(Attractions model)
+        public ActionResult Index(AttractionsSearchModel model)
         {
-            model.Location = db.Attractions.Find(model.Id).Location;
-            model.Ranks=db.Attractions.Find(model.Id).Ranks;
-            model.Category = db.Attractions.Find(model.Id).Category;
-            return View("Details", model);
+            Attractions attr = new Attractions();
+            attr = model.Attr;
+            attr.Location = db.Attractions.Find(model.Attr.Id).Location;
+            attr.Ranks=db.Attractions.Find(model.Attr.Id).Ranks;
+            attr.Category = db.Attractions.Find(model.Attr.Id).Category;
+            return View("Details", attr);
         }
 
         [HttpPost]
@@ -38,7 +47,9 @@ namespace TakeATrip.Controllers
         [HttpGet]
         public ActionResult Details(Attractions model)
         {
-            return View();
+            Attractions attr = new Attractions();
+            attr = db.Attractions.Find(model.Id);
+            return View(attr);
         }
         [HttpPost]
         public JsonResult GetAllAttraction()
@@ -58,7 +69,7 @@ namespace TakeATrip.Controllers
 
         public ActionResult GetRanksList(int id)
         {
-            var result = db.Attractions.Find(id).Ranks.Select(d => new { Name = d.Websites.Name, Rank = d.Rank, Logo = d.Websites.Logo , Weight = d.Websites.Weight, Scale = d.Websites.Scale}).ToList();
+            var result = db.Attractions.Find(id).Ranks.Select(d => new { Name = d.Websites.Name, Rank = d.Rank, Logo = d.Websites.Logo, Weight = d.Websites.Weight, Scale = d.Websites.Scale }).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

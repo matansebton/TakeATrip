@@ -10,7 +10,7 @@
     var latlng = { lat: parseFloat(lat), lng: parseFloat(lng) };
     var placeId = null;
 
-    $.get('Attractions/GetRanksList', { id: $("#Id").val() }, function (data) {
+    $.get('../../Attractions/GetRanksList', { id: $("#Id").val() }, function (data) {
         var ranks = [];
         var sumOfWeight = 0;
         var result;

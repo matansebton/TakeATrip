@@ -1,5 +1,5 @@
 ﻿#map {
-        height: 400px;
+        height: 320px;
         width: 100%;
        }
 span.stars, span.stars span {
@@ -17,3 +17,8 @@ span.stars span {
 {
     margin-bottom:5px;
 }
+
+tr{
+    cursor:pointer;
+}
+

@@ -4,10 +4,9 @@
     ViewBag.Title = "AttrFromHome";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBN-U0Blvdbgj7PUv2_IOXL8QLqTdXRcS0&libraries=places"
+        async defer></script>
 
-@Scripts.Render("~/Scripts/jquery-ui.js")
-@Scripts.Render("~/Scripts/attrFromHome.js")
 @Styles.Render("~/Content/jquery-ui.css")
 @Styles.Render("~/Content/attrFromHome.css")
 @Styles.Render("~/Content/font-awesome.css")
@@ -34,6 +33,8 @@
                         <th style="width:80%">Name</th>
                         <th style="width:20%">Rank</th>
                         <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,22 +57,34 @@
                                     @Html.Raw(cat.Id + ",")
                                 }
                             </td>
+                            <td>
+                                @item.Location.Latitude
+                            </td>
+                            <td>
+                                @item.Location.Longitude
+                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-        @*<ul>
-            @foreach (var item in Model.AttrList)
-            {
-                <li>
-                    <div> @item.Name</div>
-                    <div>
-                        <span class="stars">@item.Ranks.First().Rank</span>
-                    </div>
-                    <div> @item.Category.First().Name</div>
-                </li>
-            }
-        </ul>*@
     }
+        <div>
+            <button type="button" onclick="CreateTrack()" class="btn btn-primary">Create Track</button>
+        </div>
+        <div class="col-lg-offset-3">
+            <div id="map" style="display:none;"></div>
+        </div>
+
+
 </div>
+
+<script>
+    var url = '@Url.Action("Details", "Attractions", new { id = "__id__" })';
+</script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
+
+@Scripts.Render("~/Scripts/jquery-ui.js")
+@Scripts.Render("~/Scripts/attrFromHome.js")

@@ -1,81 +1,26 @@
-﻿@using Jmelosegui.Mvc.GoogleMap
+﻿@model TakeATrip.Models.TracksViewModel
 
 @{
-    string[] libraries = { "drawing" };
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Styles.Render("~/Content/font-awesome.css")
 
-<!DOCTYPE html>
+<script src="~/Scripts/tracks.js"></script>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div class="row">
-        <div class="col-md-12">
-            @(Html.GoogleMap()
-              .Name("map")
-              .Height(500)
-              .ApiKey("AIzaSyBN-U0Blvdbgj7PUv2_IOXL8QLqTdXRcS0")
-              .ClientEvents(events => events.OnMapLoaded("mapEvent"))
-            )
+<div>
+    <div class="page-header">
+        <div class="hidden" id="placesArr">
+            @foreach (var placeid in Model.placesId)
+            {
+                @Html.Raw(placeid + ",")
+            }
         </div>
     </div>
-</body>
-</html>
-@section scripts{
-    <script type="text/javascript">
-        var map = null;
-        var markers = [];
-        function mapEvent(args) {
-            console.log('>> map event.');
-            map = args.map;
-            markers = args.markers;
-            var drawingManager = new google.maps.drawing.DrawingManager({
-                drawingMode: google.maps.drawing.OverlayType.MARKER,
-                drawingControl: true,
-                drawingControlOptions: {
-                    position: google.maps.ControlPosition.TOP_CENTER,
-                    drawingModes: [
-                      google.maps.drawing.OverlayType.MARKER,
-                      google.maps.drawing.OverlayType.CIRCLE,
-                      google.maps.drawing.OverlayType.POLYGON,
-                      google.maps.drawing.OverlayType.POLYLINE,
-                      google.maps.drawing.OverlayType.RECTANGLE
-                    ]
-                },
-                markerOptions: {
-                    icon:
-                        'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-                },
-                circleOptions: {
-                    fillColor: '#ff0000',
-                    fillOpacity: .3,
-                    strokeWeight: 1,
-                    clickable: false,
-                    editable: true,
-                    zIndex: 1
-                },
-                polygonOptions: {
-                    fillColor: '#00ff00',
-                    fillOpacity: .3,
-                    strokeWeight: 1,
-                    clickable: false,
-                    editable: true,
-                    zIndex: 2
-                },
-                rectangleOptions: {
-                    fillColor: '#0000ff',
-                    fillOpacity: .3,
-                    strokeWeight: 1,
-                    clickable: false,
-                    editable: true,
-                    zIndex: 3
-                }
-            });
-            drawingManager.setMap(map);
-        }
-    </script>
-}
+   
+    <div id="map"></div>
+
+   
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBN-U0Blvdbgj7PUv2_IOXL8QLqTdXRcS0&libraries=places&callback=initMap"
+            async defer></script>
+</div>

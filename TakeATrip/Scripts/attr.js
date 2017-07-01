@@ -2,7 +2,7 @@
     $("#MainMenuNavbar .active").removeClass('active');
     $('#NavbarAttr').addClass('active');
 
-    $("#Name").autocomplete({
+    $("#Attr_Name").autocomplete({
         source: function (request, response) {
             $.ajax({
                 url: "/Attractions/GetAttractionList",
@@ -22,10 +22,20 @@
         },
         select: function (event, ui)
         {
-            $("#Name").val(ui.item.label);
-            $("#Id").val(ui.item.value);
+            $("#Attr_Name").val(ui.item.label);
+            $("#Attr_Id").val(ui.item.value);
             event.preventDefault();
         }
 
         });
 });
+
+function showRandomClick()
+{
+    $("#carouselExampleIndicators").removeAttr("hidden");
+    $(".carousel-inner > .item").first().addClass('active');
+    $('.pixabay_widget').each(function () {
+        var url = $(this).children(".item").children("a").children("img").data("src");
+        $("#attr_img_" + $(this).data('id')).attr('src', url);
+    });
+}

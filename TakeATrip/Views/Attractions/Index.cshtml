@@ -1,16 +1,24 @@
-﻿@model TakeATrip.Models.Attractions
+﻿@model TakeATrip.Models.AttractionsSearchModel
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>var pixabayWidget = { 'key': '5393889-2ab22bb848a62eebf28c615cc' }</script>
+<script src="~/Scripts/pixabay-widget.js" sync></script>
 @Scripts.Render("~/Scripts/jquery-ui.js")
 @Scripts.Render("~/Scripts/attr.js")
 @Styles.Render("~/Content/jquery-ui.css")
 @Styles.Render("~/Content/attr.css")
 @Styles.Render("~/Content/font-awesome.css")
 
+
 <h1 id="AttrSerchHeader">Search Your Attraction</h1>
+
+@foreach (var attr in Model.AttrList)
+{
+    <div class="pixabay_widget" hidden data-id="@attr.Id" data-search="@attr.Name" data-max-rows="2"></div>
+}
 
 <div>
     @using (Html.BeginForm())
@@ -20,14 +28,38 @@
 
             <div class="form-group">
                 <div id="attrSearchDiv" class="col-lg-offset-3">
-                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.Attr.Id)
                     <div>
-                        @Html.EditorFor(model => model.Name, new { HtmlAttribute = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Attr.Name, new { HtmlAttribute = new { @class = "form-control" } })
                         <button type="submit" class="btn btn-primary">Search<span><i id="searchIcon" class="fa fa-search"></i></span></button>
                     </div>
                 </div>
             </div>
         </div>
     }
+    <button type="button" class="btn btn-primary" onclick="showRandomClick()">Show Random Attractions<span><i class="fa fa-gift" aria-hidden="true"></i></span></button>
+    <div id="carouselExampleIndicators" hidden class="carousel slide" data-interval="2000" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            @foreach (var attr in Model.AttrList)
+            {
+                <div class="item">
+                    <img class="d-block img-fluid" id="attr_img_@attr.Id" alt="@attr.Name">
+                </div>
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div>
 
